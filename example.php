@@ -12,18 +12,14 @@ $user = new Storage\User(new Adapter\ShardedMysql)
 // for memcache cluster on ships
 $user = new Storage\User(new Adapter\Memcache( new Connection\MemcacheShips ))
 
-// get/set for either instance
+// get/set for any user instance
 $user->set( 'arbitrary-key', 'arbitrary-value' )
+$user->get( 'arbitrary-key' );
 $user->get( 'arbitrary->key', function() {
   // perform some arbitrary to complex task and write-through
   // to underlying store
 });
 
-// with traditional mysql
-$user = new Storage\Mysql( new Adapter\Mysql );
-
-// retrieve record based on primary key
-$user->get( 1 );
 
 // retrieve records with #query method provided by Adapter/ShardedMysql#query
 $user->query( $sql )
